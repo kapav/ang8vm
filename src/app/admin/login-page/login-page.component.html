@@ -1,1 +1,51 @@
-<p>login-page works!</p>
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Войти в панель администрирования</h2>
+
+  <div
+    class="form-control"
+    [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}"
+  >
+    <label for="email">Почта:</label>
+    <input id="email" type="email" formControlName="email">
+    <div
+      class="validation"
+      *ngIf="form.get('email').touched && form.get('email').invalid"
+    >
+      <small *ngIf="form.get('email').errors.required">
+        Поле почты не заполнено.
+      </small>
+      <small *ngIf="form.get('email').errors.email">
+        Неправильный формат почты.
+      </small>
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{invalid: form.get('password').touched && form.get('password').invalid}"
+  >
+    <label for="password">Пароль:</label>
+    <input id="password" type="password" formControlName="password">
+    <div
+      class="validation"
+      *ngIf="form.get('password').touched && form.get('password').invalid"
+    >
+      <small *ngIf="form.get('password').errors.required">
+        Поле пароля не заполнено.
+      </small>
+      <small *ngIf="form.get('password').errors.minlength">
+        Пароль должен быть не менее 
+        {{form.get('password').errors.minlength.requiredLength}} 
+        символов. Сейчас он из 
+        {{form.get('password').errors.minlength.actualLength}} 
+        символов.
+      </small>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="form.invalid"
+  >Войти</button>
+</form>

@@ -34,10 +34,10 @@
         Поле пароля не заполнено.
       </small>
       <small *ngIf="form.get('password').errors.minlength">
-        Пароль должен быть не менее 
-        {{form.get('password').errors.minlength.requiredLength}} 
-        символов. Сейчас он из 
-        {{form.get('password').errors.minlength.actualLength}} 
+        Пароль должен быть не менее
+        {{form.get('password').errors.minlength.requiredLength}}
+        символов. Сейчас он из
+        {{form.get('password').errors.minlength.actualLength}}
         символов.
       </small>
     </div>
@@ -46,6 +46,6 @@
   <button
     type="submit"
     class="btn btn-primary"
-    [disabled]="form.invalid"
+    [disabled]="form.invalid || submitted"
   >Войти</button>
 </form>

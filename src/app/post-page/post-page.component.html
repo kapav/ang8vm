@@ -1,19 +1,23 @@
-<div class="post">
-  <div class="header">
-    <h1>Заглавие поста</h1>
-
-    <button routerLink="/" class="btn btn-link">На главную</button>
-  </div>
-
-  <div class="info">
-    <strong>Здесь автор</strong>
-    <small>27.09.2019</small>
-  </div>
-
-  <div>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum aliquam laudantium dignissimos aperiam sit doloremque ab aut quis? Illum, veniam voluptas? Modi eligendi, sit, amet quidem ad ex architecto, consequuntur ea nobis aut dolore atque nam? Non, temporibus impedit nam tempore id voluptates est sunt hic odio. Itaque, tempore in?</p>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis magnam beatae aut. Debitis placeat quo eligendi harum, aliquid veniam illo ipsam. Nisi numquam adipisci maiores suscipit. Officia veniam placeat inventore soluta, assumenda architecto perferendis alias nisi perspiciatis consequatur. Aspernatur ad quasi animi nam sequi voluptatibus, et minus soluta perspiciatis quis.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum possimus voluptates quis quasi facilis suscipit similique veniam totam minus deserunt distinctio in iste incidunt, tempora atque, architecto autem quam voluptas quas. Pariatur, explicabo. Qui minus sunt blanditiis, at quae mollitia repellendus repudiandae ad eaque, perspiciatis odit nam fuga laudantium ab.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit iste, ea ipsam accusantium, impedit ipsa labore cum id animi eum maiores eaque, qui atque debitis sunt? Tenetur, amet doloremque quasi natus accusantium beatae maxime sapiente perspiciatis in earum provident. Consectetur eum sapiente odit provident, laborum exercitationem? Vitae eos ea fugiat.</p>
+<div *ngIf="post$ | async as post; else loading">
+  <div class="post">
+    <div class="header">
+      <h1>{{ post.title }}</h1>
+  
+      <button routerLink="/" class="btn btn-link">На главную</button>
+    </div>
+  
+    <div class="info">
+      <strong>{{ post.author }}</strong>
+      <small>{{ post.date | date:'medium':null:'ru' }}</small>
+    </div>
+  
+    <div>
+      <quill-view-html [content]="post.text"></quill-view-html>
+    </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <p class="text-center">Пост загружается...</p>
+</ng-template>
+
